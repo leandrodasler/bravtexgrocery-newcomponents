@@ -1,0 +1,48 @@
+.wppContainer,
+.smsContainer,
+.emailContainer {
+	align-items: center;
+	display: flex;
+}
+div[class*='vtex-profile-form-3-x-extendedFields'] input[type='checkbox'],
+input[type='checkbox'] {
+	width: 16px;
+	height: 16px;
+	background: #f7faf9;
+	border: 1.5px solid #dadedc;
+	box-sizing: border-box;
+	border-radius: 4px;
+	margin-right: 6px;
+}
+.titleComponent {
+	font-weight: bold;
+	font-size: 14px;
+	color: #00ac5a;
+	margin-top: 0;
+}
+.textComponentOffer,
+.wppContainer label[for='isWhatsAppOptIn'],
+.smsContainer label[for='isSmsOptIn'],
+.emailContainer label[for='isNewsletterOptIn'] {
+	font-size: 14px;
+	color: #36403b;
+	font-weight: normal;
+}
+.wppContainer {
+	margin-bottom: 24px;
+}
+.offerContainer .textComponentOffer {
+	margin-bottom: 14px;
+}
+div[class*='vtex-profile-form-3-x-extendedFields'] .wppContainer div[class*='vtex-checkbox__line-container'],
+div[class*='vtex-profile-form-3-x-extendedFields'] .smsContainer div[class*='vtex-checkbox__line-container'],
+div[class*='vtex-profile-form-3-x-extendedFields'] .emailContainer div[class*='vtex-checkbox__line-container'] {
+	display: flex;
+	/* align-items: center; */
+	margin-bottom: 5px;
+}
+@media only screen and (max-width: 640px) {
+	.textComponent {
+		max-width: 210px;
+	}
+}

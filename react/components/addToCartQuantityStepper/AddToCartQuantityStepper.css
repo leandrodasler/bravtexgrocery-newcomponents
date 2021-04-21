@@ -1,0 +1,9 @@
+.containerAddCartButton :global(.vtex-button) {
+    width: 100%;
+    max-width: 200px;
+}
+.contentAddedToCartTxt {
+    color: #06623a;
+    font-weight: bold;
+    opacity: 0.8;
+}

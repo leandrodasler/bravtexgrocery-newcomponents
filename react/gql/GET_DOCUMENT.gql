@@ -1,0 +1,18 @@
+query GET_DOCUMEN($acronym: String, $fields: [String], $where: String, $account: String) {
+	documents(acronym: $acronym, fields: $fields, where: $where, account: $account) {
+		fields {
+			key
+			value
+		}
+	}
+}
+
+# {
+#   "acronym": "CL",
+#   "fields": [
+#     "isNewsletterOptIn",
+#     "isWhatsappOptIn",
+#     "isSmsOptIn"
+#   ],
+#   // 'userId=5fc4c1fb-8900-42eb-8f7d-2655597cc46e'
+# }

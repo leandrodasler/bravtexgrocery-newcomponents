@@ -16,5 +16,8 @@
 		"component": "UnitMeasures",
 		"allowed": ["add-to-cart-button"],
 		"blocks": ["add-to-cart-button"]
+	},
+	"current-address-component": {
+		"component": "CurrentAddressComponent"
 	}
 }

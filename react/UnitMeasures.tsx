@@ -1,3 +1,3 @@
-import UnitMeasures from './components/unitMeasures/UnitMeasures'
+import UnitMeasures from "./components/unitMeasures/UnitMeasures";
 
-export default UnitMeasures
+export default UnitMeasures;

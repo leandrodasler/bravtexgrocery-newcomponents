@@ -4,7 +4,7 @@
     "moduleResolution": "node",
     "target": "es2017",
     "declaration": true,
-    "declarationDir": "/cache/build/build_bravtexgrocerystore_master/bravtexgrocerystore.bravtexgrocery-components@0.1.0/public/@types/bravtexgrocerystore.bravtexgrocery-components/react",
+    "declarationDir": "/cache/build/build_bravtexgrocerystore_master/bravtexgrocerystore.bravtexgrocery-newcomponents@0.1.0/public/@types/bravtexgrocerystore.bravtexgrocery-newcomponents/react",
     "jsx": "preserve",
     "lib": ["es2017", "dom", "es2018.promise"],
     "noEmitOnError": false,

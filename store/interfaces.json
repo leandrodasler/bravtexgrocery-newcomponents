@@ -1,22 +1,4 @@
 {
-	"fixed-prices": {
-		"component": "FixedPrices",
-		"allowed": ["add-to-cart-button"],
-		"blocks": ["add-to-cart-button"]
-	},
-	"profile-display.display-account": {
-		"component": "DisplayAccountProvider"
-	},
-	"add-to-cart-quantity-stepper": {
-		"component": "AddToCartQuantityStepper",
-		"allowed": ["add-to-cart-button"],
-		"blocks": ["add-to-cart-button"]
-	},
-	"unit-measures-specs": {
-		"component": "UnitMeasures",
-		"allowed": ["add-to-cart-button"],
-		"blocks": ["add-to-cart-button"]
-	},
 	"current-address-component": {
 		"component": "CurrentAddressComponent"
 	}

@@ -25,7 +25,7 @@ export default function Modal({ handleClose, show }) {
           <label className="modalLabel">
             <input
               className="modalInput"
-              maxLength="8"
+              maxLength={8}
               onChange={(event) => {
                 if (
                   event.target.value.length === 8 &&

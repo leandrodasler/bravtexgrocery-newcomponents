@@ -1,19 +1,9 @@
 import React from "react";
-import { useCssHandles } from "vtex.css-handles";
-import "./AddToCartQuantityStepper.css";
-import Modal from "./Modal.js";
+import Modal from "./Modal";
 
 const pin = require("./pin.svg") as string
 
-const CSS_HANDLES = [
-  "containerAddCartButton",
-  "containerQuantity",
-  "contentAddedToCartTxt",
-  "contentQuantity",
-];
-
 const CurrentAddressComponent = () => {
-  const handles = useCssHandles(CSS_HANDLES);
 
   const [localidade, setLocalidade] = React.useState("");
   const [showModal, setShowModal] = React.useState(false);

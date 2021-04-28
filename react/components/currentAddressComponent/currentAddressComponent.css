@@ -1,5 +1,7 @@
 .addressComponent {
 	display: flex;
+	cursor: pointer;
+	margin-left: 48px;
   }
   
   .addressComponentInfo {
@@ -8,16 +10,41 @@
   }
   
   .pinIcon {
-	margin-right: 1rem;
+	margin-right: 0.9rem;
+	object-fit: contain;
   }
   
   .addressComponentTitle {
 	color: rgba(20, 32, 50, 0.6);
-	margin-bottom: 0.5rem;
+	margin-bottom: 0.3rem;
   }
   
   .addressComponentTitle,
   .currentAddress {
-	font-weight: 400;
+	font-weight: bold;
+	font-size: 12px;
   }
-  
+  @media only screen and (max-width: 1025px) {
+	.addressComponentInfo {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-left: 0.7rem;
+	  }
+
+	  .addressComponentTitle {
+		  margin: 0;
+	  }
+
+	  .currentAddress {
+		  margin-left: 0.4rem;
+	  }
+
+	.pinIcon {
+		margin: 0;
+	}
+
+	.addressComponent {
+		margin: 4px 12px;
+	}
+}

@@ -1,36 +1,51 @@
 import React from "react";
-import Modal from "./Modal";
+import "./CurrentAddressComponent.css";
+import { useCssHandles } from "vtex.css-handles";
 
-const pin = require("./pin.svg") as string
+const pin = require("./pin.svg") as string;
+
+const CSS_HANDLES = [
+  "addressComponent",
+  "pinIcon",
+  "addressComponentInfo",
+  "addressComponentTitle",
+  "currentAddress",
+];
 
 const CurrentAddressComponent = () => {
-
   const [localidade, setLocalidade] = React.useState("");
-  const [showModal, setShowModal] = React.useState(false);
+  const handles = useCssHandles(CSS_HANDLES);
 
   React.useEffect(() => {
-	  const cep = localStorage.getItem("CEP");
-	  
-      fetch(`https://viacep.com.br/ws/${cep}/json/`, {
-        method: "GET",
-        mode: "cors",
-        cache: "default",
+    const cep = localStorage.getItem("CEP");
+
+    fetch(`https://viacep.com.br/ws/${cep}/json/`, {
+      method: "GET",
+      mode: "cors",
+      cache: "default",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        data.erro
+          ? setLocalidade("CEP inválido, clique para alterar.")
+          : setLocalidade(data.localidade + " - " + data.uf);
       })
-        .then((response) => response.json())
-        .then((data) => {
-          setLocalidade(data.localidade + " - " + data.uf);
-        })
-        .catch(() => setLocalidade(''));
+      .catch(() => setLocalidade(""));
   }, []);
 
   return (
     <>
-      <Modal show={showModal} handleClose={() => setShowModal(false)} />
-      <div className="addressComponent">
-        <img className="pinIcon" src={pin} alt="Ícone de Localização" />
-        <div className="addressComponentInfo">
-          <span className="addressComponentTitle">Enviar para: </span>
-          <span className="currentAddress" onClick={() => setShowModal(true)}>
+      <div className={`${handles.addressComponent}`}>
+        <img
+          className={`${handles.pinIcon}`}
+          src={pin}
+          alt="Ícone de Localização"
+        />
+        <div className={`${handles.addressComponentInfo}`}>
+          <span className={`${handles.addressComponentTitle}`}>
+            Enviar para:{" "}
+          </span>
+          <span className={`${handles.currentAddress}`}>
             {localidade ? localidade : "Clique para inserir seu CEP"}
           </span>
         </div>

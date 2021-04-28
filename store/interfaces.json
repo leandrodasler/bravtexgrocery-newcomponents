@@ -1,5 +1,8 @@
 {
 	"current-address-component": {
 		"component": "CurrentAddressComponent"
+	},
+	"current-address-modal": {
+		"component": "AddressModal"
 	}
 }

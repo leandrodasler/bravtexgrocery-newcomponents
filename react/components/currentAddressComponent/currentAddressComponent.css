@@ -1,7 +1,6 @@
 .addressComponent {
 	display: flex;
 	cursor: pointer;
-	margin-left: 48px;
   }
   
   .addressComponentInfo {

@@ -12,6 +12,50 @@ const CSS_HANDLES = [
   "currentAddress",
 ];
 
+function getBodySession(e: string | null) {
+  const t = { public: { country: { value: "BRA" }, postalCode: { value: e } } };
+  return JSON.stringify(t);
+}
+
+function setSession(e: string | null) {
+  const t = new Headers();
+  t.append("Content-Type", "application/json");
+  const n = getBodySession(e);
+  return fetch("/api/sessions", {
+    headers: t,
+    body: n,
+    method: "POST",
+    credentials: "same-origin",
+  });
+}
+async function getAddress(e: string | null) {
+  const t = await fetch(`/api/checkout/pub/postal-code/BRA/${e}`, {
+    credentials: "same-origin",
+  });
+  return await t.json();
+}
+function setShippingData(e: string | null, t: any) {
+  const n = new Headers();
+  n.append("Content-Type", "application/json");
+  return fetch(`/api/checkout/pub/orderForm/${e}/attachments/shippingData`, {
+    headers: n,
+    body: JSON.stringify(t),
+    method: "POST",
+    credentials: "same-origin",
+  });
+}
+async function getOrderFormId() {
+  const e = await fetch("/api/checkout/pub/orderForm", {
+    credentials: "same-origin",
+  });
+  return (await e.json()).orderFormId;
+}
+async function setAddress(e: string | null) {
+  let t: any;
+  (t = await getAddress(e)),
+    setShippingData(await getOrderFormId(), { address: t });
+}
+
 const CurrentAddressComponent = () => {
   const [localidade, setLocalidade] = React.useState("");
   const handles = useCssHandles(CSS_HANDLES);
@@ -26,9 +70,12 @@ const CurrentAddressComponent = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        data.erro
-          ? setLocalidade("CEP inválido, clique para alterar.")
-          : setLocalidade(data.localidade + " - " + data.uf);
+        if (data.erro) {
+          setLocalidade("CEP inválido, clique para alterar.");
+        } else {
+          setLocalidade(data.localidade + " - " + data.uf);
+          setSession(cep).then(() => setAddress(cep));
+        }
       })
       .catch(() => setLocalidade(""));
   }, []);

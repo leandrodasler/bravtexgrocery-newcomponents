@@ -26,6 +26,7 @@ export default function AddressModal() {
           onSubmit={() => {
             if (cep.length === 8) {
               localStorage.setItem("CEP", cep);
+			  location.reload();
             }
           }}
         >

@@ -10,8 +10,8 @@
 .modalMain {
   position: fixed;
   background: white;
-  width: 25%;
-  height: 20%;
+  min-width: 400px;
+  height: 190px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

@@ -1,3 +1,3 @@
-import  CurrentAddressComponent  from './components/CurrentAddressComponent/CurrentAddressComponent'
+import CurrentAddressComponent from "./components/CurrentAddressComponent/CurrentAddressComponent";
 
-export default CurrentAddressComponent
+export default CurrentAddressComponent;

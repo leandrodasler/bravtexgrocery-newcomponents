@@ -1,3 +1,3 @@
-import  AddressModal  from './components/AddressModal/AddressModal'
+import AddressModal from "./components/AddressModal/AddressModal";
 
-export default AddressModal
+export default AddressModal;

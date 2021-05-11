@@ -10,7 +10,6 @@
 .modalMain {
   position: fixed;
   background: white;
-  min-width: 400px;
   height: 190px;
   top: 50%;
   left: 50%;
@@ -87,8 +86,14 @@
 
 @media only screen and (max-width: 1025px) {
 	.modalMain {
-
 		width: 45%;
-		height: 20%;
+		height: 15%;
 	  }
+}
+
+@media only screen and (max-width: 650px) {
+	.modalMain {
+		width: 90vw;
+		height: 25vh;
+	}
 }

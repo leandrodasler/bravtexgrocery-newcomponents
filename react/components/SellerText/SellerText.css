@@ -1,0 +1,49 @@
+.addressComponent {
+	display: flex;
+	cursor: pointer;
+  }
+  
+  .addressComponentInfo {
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .pinIcon {
+	margin-right: 0.9rem;
+	object-fit: contain;
+  }
+  
+  .addressComponentTitle {
+	color: rgba(20, 32, 50, 0.6);
+	margin-bottom: 0.3rem;
+  }
+  
+  .addressComponentTitle,
+  .currentAddress {
+	font-weight: bold;
+	font-size: 16px;
+  }
+  @media only screen and (max-width: 1025px) {
+	.addressComponentInfo {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-left: 0.7rem;
+	  }
+
+	  .addressComponentTitle {
+		  margin: 0;
+	  }
+
+	  .currentAddress {
+		  margin-left: 0.4rem;
+	  }
+
+	.pinIcon {
+		margin: 0;
+	}
+
+	.addressComponent {
+		margin: 4px 12px;
+	}
+}

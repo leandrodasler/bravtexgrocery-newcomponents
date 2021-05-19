@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.4.0] - 2021-05-19
 
+### Added
+- Add SellerText Component
+
 ## [0.2.0] - 2021-04-28
 
 ### Added

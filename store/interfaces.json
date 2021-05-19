@@ -4,5 +4,8 @@
 	},
 	"current-address-modal": {
 		"component": "AddressModal"
+	},
+	"seller-text": {
+		"component": "SellerText"
 	}
 }

@@ -3,11 +3,8 @@ import "./SellerText.css";
 import { useCssHandles } from "vtex.css-handles";
 
 const CSS_HANDLES = [
-  "addressComponent",
-  "pinIcon",
-  "addressComponentInfo",
-  "addressComponentTitle",
-  "currentAddress",
+  "sellerDiv",
+  "sellerText"
 ];
 
 const SellerText = () => {

@@ -7,13 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.4] - 2021-04-23
+## [0.4.1] - 2021-05-19
 
-## [0.1.3] - 2021-04-23
+## [0.4.0] - 2021-05-19
 
-## [0.1.2] - 2021-04-23
+### Added
+- Add SellerText Component
 
-## [0.1.1] - 2021-04-23
+## [0.2.0] - 2021-04-28
+
+### Added
+- Add CurrentAddress Component
+
+### Removed
+- Remove unused components
 
 ## [0.1.0] - 2020-12-17
 

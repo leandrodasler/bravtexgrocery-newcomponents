@@ -1,7 +1,7 @@
 {
   "vendor": "bravtexgrocerystore",
-  "name": "bravtexgrocery-components",
-  "version": "0.1.4",
+  "name": "bravtexgrocery-newcomponents",
+  "version": "0.4.1",
   "builders": {
     "store": "0.x",
     "react": "3.x",
@@ -20,12 +20,12 @@
     "vtex.store-resources": "0.x",
     "vtex.store-components": "3.x",
     "vtex.store-graphql": "2.x",
-    "bravtexgrocerystore.bravtexgrocery-graphql": "0.x",
     "vtex.order-manager": "0.x",
     "vtex.product-summary-context": "0.x",
     "vtex.add-to-cart-button": "0.x",
     "vtex.order-items": "0.x",
-    "vtex.product-summary": "2.x"
+    "vtex.product-summary": "2.x",
+    "vtex.apps-graphql": "2.x"
   },
   "registries": [],
   "policies": [],

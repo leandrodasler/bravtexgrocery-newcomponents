@@ -1,0 +1,4 @@
+.bannersLoading :global(.vtex-styleguide-9-x-rotate) {
+  width: 50px;
+  margin: 30px calc((100% - 50px) / 2);
+}

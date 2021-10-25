@@ -1,11 +1,23 @@
 {
-	"current-address-component": {
-		"component": "CurrentAddressComponent"
-	},
-	"current-address-modal": {
-		"component": "AddressModal"
-	},
-	"seller-text": {
-		"component": "SellerText"
-	}
+  "current-address-component": {
+    "component": "CurrentAddressComponent"
+  },
+  "current-address-modal": {
+    "component": "AddressModal"
+  },
+  "seller-text": {
+    "component": "SellerText"
+  },
+  "region-banner": {
+    "component": "RegionBanner",
+    "composition": "children",
+    "allowed": "*",
+    "content": {
+      "properties": {
+        "images": {
+          "$ref": "app:bravtexgrocerystore.bravtexgrocery-newcomponents#/definitions/Images"
+        }
+      }
+    }
+  }
 }

@@ -13,8 +13,7 @@ const SellerText = () => {
     <div className={`${handles.sellerDiv}`}>
       {productContextValue ? (
         <p className={`${handles.sellerText}`}>
-          Vendido e entregue por:{" "}
-          {productContextValue?.selectedItem?.sellers[0].sellerName}
+          Vendido e entregue por: {productContextValue?.selectedItem?.sellers.find((seller) => seller.sellerDefault)?.sellerName}
         </p>
       ) : (
         ""

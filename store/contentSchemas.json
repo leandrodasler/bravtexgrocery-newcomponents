@@ -1,0 +1,173 @@
+{
+  "definitions": {
+    "Image": {
+      "title": "admin/editor.store-image.title",
+      "properties": {
+        "src": {
+          "title": "admin/editor.image.src.title",
+          "$ref": "app:vtex.native-types#/definitions/url",
+          "default": "",
+          "widget": {
+            "ui:widget": "image-uploader"
+          }
+        },
+        "link": {
+          "$ref": "app:vtex.native-types#/definitions/link",
+          "default": ""
+        },
+        "alt": {
+          "title": "admin/editor.image.alt.title",
+          "$ref": "app:vtex.native-types#/definitions/text",
+          "default": ""
+        },
+        "title": {
+          "title": "admin/editor.image.title.title",
+          "description": "admin/editor.image.title.description",
+          "$ref": "app:vtex.native-types#/definitions/text",
+          "default": ""
+        },
+        "analyticsProperties": {
+          "title": "admin/editor.image.analytics.title",
+          "description": "admin/editor.image.analytics.description",
+          "enum": ["none", "provide"],
+          "enumNames": ["admin/editor.image.analytics.none", "admin/editor.image.analytics.provide"],
+          "widget": {
+            "ui:widget": "radio"
+          },
+          "default": "none"
+        }
+      },
+      "dependencies": {
+        "analyticsProperties": {
+          "oneOf": [
+            {
+              "properties": {
+                "analyticsProperties": {
+                  "enum": ["provide"]
+                },
+                "promotionId": {
+                  "title": "admin/editor.image.analytics.promotionId",
+                  "type": "string",
+                  "default": ""
+                },
+                "promotionName": {
+                  "title": "admin/editor.image.analytics.promotionName",
+                  "type": "string",
+                  "default": ""
+                },
+                "promotionPosition": {
+                  "title": "admin/editor.image.analytics.promotionPosition",
+                  "type": "string",
+                  "default": ""
+                }
+              }
+            },
+            {
+              "properties": {
+                "analyticsProperties": {
+                  "enum": ["none"]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "Images": {
+      "type": "array",
+      "title": "admin/editor.image-list.images.title",
+      "items": {
+        "properties": {
+          "image": {
+            "$ref": "app:vtex.native-types#/definitions/url",
+            "default": "",
+            "title": "admin/editor.image-list.images.image.title",
+            "widget": {
+              "ui:widget": "image-uploader"
+            }
+          },
+          "mobileImage": {
+            "$ref": "app:vtex.native-types#/definitions/url",
+            "default": "",
+            "title": "admin/editor.image-list.images.mobileImage.title",
+            "widget": {
+              "ui:widget": "image-uploader"
+            }
+          },
+          "description": {
+            "$ref": "app:vtex.native-types#/definitions/text",
+            "default": "",
+            "title": "admin/editor.image-list.images.description.title"
+          },
+          "title": {
+            "title": "admin/editor.image-list.images.title.title",
+            "$ref": "app:vtex.native-types#/definitions/text",
+            "default": ""
+          },
+          "link": {
+            "default": "",
+            "title": "",
+            "$ref": "app:vtex.native-types#/definitions/link"
+          },
+          "width": {
+            "title": "admin/editor.image-list.images.width.title",
+            "description": "admin/editor.image-list.images.width.description",
+            "$ref": "app:vtex.native-types#/definitions/text",
+            "default": "100%"
+          },
+          "franchises": {
+            "title": "admin/editor.image-list.images.franchises.title",
+            "description": "admin/editor.image-list.images.franchises.description",
+            "$ref": "app:vtex.native-types#/definitions/text",
+            "default": ""
+          },
+          "analyticsProperties": {
+            "title": "admin/editor.image.analytics.title",
+            "description": "admin/editor.image.analytics.description",
+            "enum": ["none", "provide"],
+            "enumNames": ["admin/editor.image.analytics.none", "admin/editor.image.analytics.provide"],
+            "widget": {
+              "ui:widget": "radio"
+            },
+            "default": "none"
+          }
+        },
+        "dependencies": {
+          "analyticsProperties": {
+            "oneOf": [
+              {
+                "properties": {
+                  "analyticsProperties": {
+                    "enum": ["provide"]
+                  },
+                  "promotionId": {
+                    "title": "admin/editor.image.analytics.promotionId",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "promotionName": {
+                    "title": "admin/editor.image.analytics.promotionName",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "promotionPosition": {
+                    "title": "admin/editor.image.analytics.promotionPosition",
+                    "type": "string",
+                    "default": ""
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "analyticsProperties": {
+                    "enum": ["none"]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

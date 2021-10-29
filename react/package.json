@@ -29,6 +29,8 @@
     "vtex.store-components": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-components@3.138.2/public/@types/vtex.store-components",
     "vtex.store-resources": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-resources@0.75.1/public/@types/vtex.store-resources",
     "vtex.styleguide": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.134.1/public/@types/vtex.styleguide",
-    "vtex.apps-graphql": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.apps-graphql@2.8.0/public/@types/vtex.apps-graphql"
+    "vtex.apps-graphql": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.apps-graphql@2.8.0/public/@types/vtex.apps-graphql",
+    "vtex.store-image": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-image@0.14.2/public/@types/vtex.store-image",
+    "vtex.list-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.list-context@0.2.0/public/@types/vtex.list-context"
   }
 }

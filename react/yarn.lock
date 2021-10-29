@@ -4959,6 +4959,10 @@ verror@1.10.0:
   version "0.4.4"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@0.4.4/public/@types/vtex.css-handles#8c45c6decf9acd2b944e07261686decff93d6422"
 
+"vtex.list-context@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.list-context@0.2.0/public/@types/vtex.list-context":
+  version "0.2.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.list-context@0.2.0/public/@types/vtex.list-context#935b748d394851ced7f3b06bbedf59f4ee3ca8a6"
+
 "vtex.my-account-commons@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.my-account-commons@1.5.2/public/@types/vtex.my-account-commons":
   version "1.5.2"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.my-account-commons@1.5.2/public/@types/vtex.my-account-commons#71beef3822cd90f459b83fdd23a2ababcfc58e11"
@@ -4990,6 +4994,10 @@ verror@1.10.0:
 "vtex.store-components@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-components@3.138.2/public/@types/vtex.store-components":
   version "3.138.2"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-components@3.138.2/public/@types/vtex.store-components#683f2f1ecfb86193cb7269d83027f8846970e865"
+
+"vtex.store-image@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-image@0.14.2/public/@types/vtex.store-image":
+  version "0.14.2"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-image@0.14.2/public/@types/vtex.store-image#8110d7fe7a27c8e08cab98f52426ca239be38694"
 
 "vtex.store-resources@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-resources@0.75.1/public/@types/vtex.store-resources":
   version "0.75.1"

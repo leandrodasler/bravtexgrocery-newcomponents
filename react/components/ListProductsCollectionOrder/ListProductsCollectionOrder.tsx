@@ -1,4 +1,4 @@
-import { /* React,  */ useEffect, useCallback, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import type { ComponentType, PropsWithChildren } from "react";
 
 import { ProductSummaryListWithoutQuery } from "vtex.product-summary";
@@ -143,7 +143,7 @@ const ListProductsCollectionOrder = (props: PropsWithChildren<Props>) => {
           }
         : {}),
       specificationFilters: specificationFilters.map(parseFilters),
-      orderBy,
+      orderBy: orderBy === ORDER_BY_OPTIONS.COLLECTION.value ? ORDER_BY_OPTIONS.RELEVANCE.value : orderBy,
       from: 0,
       to: maxItems - 1,
       hideUnavailableItems,
@@ -177,29 +177,33 @@ const ListProductsCollectionOrder = (props: PropsWithChildren<Props>) => {
   );
 
   useEffect(() => {
-    fetch(`/api/catalog/pvt/collection/${collection}/products?Active=true&Visible=true`, {
-      headers: { "Content-Type": "application/json" },
-      credentials: "same-origin",
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (products?.length && products?.length === json?.Data?.length) {
-          setLoadingRest(false);
-
-          let reorderedProducts: typeof products = [];
-
-          json?.Data.forEach((p, index: number) => {
-            products.forEach((product) => {
-              if (+(product.productId as string) === p.ProductId) {
-                reorderedProducts[index] = product;
-              }
-            });
-          });
-          setReorderedProducts(reorderedProducts);
-        }
+    if (orderBy === ORDER_BY_OPTIONS.COLLECTION.value) {
+      fetch(`/api/catalog/pvt/collection/${collection}/products?Active=true&Visible=true`, {
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
       })
-      .catch((error) => console.error(error));
-  }, [collection, products]);
+        .then((res) => res.json())
+        .then((json) => {
+          if (products?.length && products?.length === json?.Data?.length) {
+            let reorderedProducts: typeof products = [];
+
+            json?.Data.forEach((p, index: number) => {
+              products.forEach((product) => {
+                if (+(product.productId as string) === p.ProductId) {
+                  reorderedProducts[index] = product;
+                }
+              });
+            });
+            setReorderedProducts(reorderedProducts);
+            setLoadingRest(false);
+          }
+        })
+        .catch((error) => console.error(error));
+    } else {
+      setReorderedProducts(products);
+      setLoadingRest(false);
+    }
+  }, [orderBy, collection, products]);
 
   if (loading || loadingRest || error) {
     return null;

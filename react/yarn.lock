@@ -4975,6 +4975,10 @@ verror@1.10.0:
   version "0.0.0"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.my-orders-app@2.12.0/public/_types/react#fa7a0347e046eab3dd768998fc9252b2c0dd5aef"
 
+"vtex.pixel-manager@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-manager@1.8.0/public/@types/vtex.pixel-manager":
+  version "1.8.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-manager@1.8.0/public/@types/vtex.pixel-manager#3ccfcb1927614984a5f7a3e5650c8c8d2bd3c0f4"
+
 "vtex.product-context@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.9.7/public/@types/vtex.product-context":
   version "0.9.7"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.9.7/public/@types/vtex.product-context#4024c589f1ba318e92219a88bf18b4e3774dc85c"
@@ -4982,6 +4986,10 @@ verror@1.10.0:
 "vtex.product-list@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-list@0.27.2/public/@types/vtex.product-list":
   version "0.27.2"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-list@0.27.2/public/@types/vtex.product-list#0ce78e0d721a214d86d58fe5b350423a4098f2a5"
+
+"vtex.product-summary@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-summary@2.77.1/public/@types/vtex.product-summary":
+  version "2.77.1"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-summary@2.77.1/public/@types/vtex.product-summary#b273b50132ae3e58198f148600bf0c45769fe933"
 
 "vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.126.5/public/@types/vtex.render-runtime":
   version "8.126.5"
@@ -5002,6 +5010,10 @@ verror@1.10.0:
 "vtex.store-resources@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-resources@0.75.1/public/@types/vtex.store-resources":
   version "0.75.1"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-resources@0.75.1/public/@types/vtex.store-resources#6374ad0729cb1ee5b06f7e094b4bdbeb1e2679d0"
+
+"vtex.structured-data@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.structured-data@0.7.0/public/@types/vtex.structured-data":
+  version "0.7.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.structured-data@0.7.0/public/@types/vtex.structured-data#d5bf90738149074c2239243b58d8fcfa0bab2cf4"
 
 "vtex.styleguide@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.134.1/public/@types/vtex.styleguide":
   version "9.134.1"

@@ -27,7 +27,9 @@
     "vtex.order-items": "0.x",
     "vtex.product-summary": "2.x",
     "vtex.apps-graphql": "2.x",
-    "vtex.store-image": "0.x"
+    "vtex.store-image": "0.x",
+    "vtex.pixel-manager": "1.x",
+    "vtex.structured-data": "0.x"
   },
   "registries": [],
   "policies": [],

@@ -1,0 +1,14 @@
+{
+  "section": "customer",
+  "titleId": "adminCertificates.navigation.label",
+  "subSectionItems": [
+    {
+      "labelId": "adminCertificates.navigation.users",
+      "path": "/admin/admin-certificates/users"
+    },
+    {
+      "labelId": "adminCertificates.navigation.certificates",
+      "path": "/admin/admin-certificates/certificates"
+    }
+  ]
+}

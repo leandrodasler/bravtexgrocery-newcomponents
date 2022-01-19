@@ -1,0 +1,10 @@
+{
+  "admin.admin-certificates-users": {
+    "component": "AdminCertificatesUsers",
+    "path": "/admin/app/admin-certificates/users"
+  },
+  "admin.admin-certificates-certificates": {
+    "component": "AdminCertificates",
+    "path": "/admin/app/admin-certificates/certificates"
+  }
+}

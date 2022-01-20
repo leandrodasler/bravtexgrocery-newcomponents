@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { injectIntl } from "react-intl";
-import { Spinner, Table, Button, ButtonWithIcon, IconUpload, IconUnorderedList, ModalDialog, IconDelete } from "vtex.styleguide";
+import { Spinner, Table, Button, ButtonWithIcon, IconUpload, IconUnorderedList, Modal, ModalDialog, IconDelete } from "vtex.styleguide";
 import { ContentWrapper } from "vtex.my-account-commons";
 
 type Certificate = {
@@ -22,9 +22,11 @@ const commonFetchProperties: RequestInit = {
 const MyCertificates = ({ intl }) => {
   const [userEmail, setUserEmail] = useState("");
   const [certificates, setCertificates] = useState<Array<Certificate> | null | undefined>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
+  const [isModalViewOpen, setIsModalViewOpen] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [certificateToDelete, setCertificateToDelete] = useState<Certificate | null>(null);
+  const [certificateToBeViewd, setCertificateToBeViewd] = useState<Certificate | null>(null);
 
   const listCertificates = () => {
     if (userEmail) {
@@ -59,7 +61,11 @@ const MyCertificates = ({ intl }) => {
         title: intl.formatMessage({ id: "myCertificates.file" }),
         width: 150,
         cellRenderer: ({ rowData }) => (
-          <Button variation="secondary" size="small" href={rowData.certificateFile} target="_blank">
+          <Button
+            variation="secondary"
+            size="small"
+            onClick={() => handleOpenCertificate(rowData)} /*  href={rowData.certificateFile} target="_blank" */
+          >
             {intl.formatMessage({ id: "myCertificates.viewFile" })}
           </Button>
         ),
@@ -82,7 +88,7 @@ const MyCertificates = ({ intl }) => {
       })
         .then((res) => res.text())
         .then(() => {
-          setIsModalOpen(false);
+          setIsModalDeleteOpen(false);
           setLoadingDelete(false);
           setCertificates((certificates) => certificates?.filter((certificate) => certificate.id !== certificateToDelete.id));
         });
@@ -90,12 +96,21 @@ const MyCertificates = ({ intl }) => {
   };
 
   const handleCancelation = () => {
-    setIsModalOpen(false);
+    setIsModalDeleteOpen(false);
   };
 
-  const handleDelete = (certificate: Certificate) => {
+  const handleDelete = (certificate: Certificate | null) => {
     setCertificateToDelete(certificate);
-    setIsModalOpen(true);
+    setIsModalDeleteOpen(true);
+  };
+
+  const handleOpenCertificate = (certificate: Certificate | null) => {
+    setCertificateToBeViewd(certificate);
+    setIsModalViewOpen(true);
+  };
+
+  const handleCloseModalCertificate = () => {
+    setIsModalViewOpen(false);
   };
 
   useEffect(() => {
@@ -127,6 +142,15 @@ const MyCertificates = ({ intl }) => {
         <>
           {certificates?.length ? (
             <>
+              <Modal
+                title={`Certificado nº ${certificateToBeViewd?.certificateNumber} - ${certificateToBeViewd?.certificateEmail}`}
+                centered
+                responsiveFullScreen
+                isOpen={isModalViewOpen}
+                onClose={handleCloseModalCertificate}
+              >
+                <iframe src={certificateToBeViewd?.certificateFile} style={{ width: "100%", height: "80vh" }} />
+              </Modal>
               <ModalDialog
                 centered
                 loading={loadingDelete}
@@ -139,7 +163,7 @@ const MyCertificates = ({ intl }) => {
                   onClick: handleCancelation,
                   label: intl.formatMessage({ id: "myCertificates.cancel" }),
                 }}
-                isOpen={isModalOpen}
+                isOpen={isModalDeleteOpen}
                 onClose={handleCancelation}
               >
                 <h3>{intl.formatMessage({ id: "myCertificates.delete" })}?</h3>
@@ -161,7 +185,11 @@ const MyCertificates = ({ intl }) => {
                 </section>
                 <section>
                   <strong>{intl.formatMessage({ id: "myCertificates.file" })}: </strong>
-                  <Button variation="secondary" size="small" href={certificateToDelete?.certificateFile} target="_blank">
+                  <Button
+                    variation="secondary"
+                    size="small"
+                    onClick={() => handleOpenCertificate(certificateToDelete)} /*  href={certificateToDelete?.certificateFile} target="_blank" */
+                  >
                     {intl.formatMessage({ id: "myCertificates.viewFile" })}
                   </Button>
                 </section>

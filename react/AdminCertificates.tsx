@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Layout, PageHeader, PageBlock, Button, Table } from "vtex.styleguide";
+import { Layout, PageHeader, PageBlock, Button, Table, Modal } from "vtex.styleguide";
 
 const commonFetchProperties: RequestInit = {
   headers: { "Content-Type": "application/json" },
@@ -11,6 +11,17 @@ const DEFAULT_STATE_LABEL = "Carregando...";
 const AdminCertificates: FC = () => {
   const [certificates, setCertificates] = useState<Array<any>>([]);
   const [emptyStateLabel, setEmptyStateLabel] = useState(DEFAULT_STATE_LABEL);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [certificateToBeViewd, setCertificateToBeViewd] = useState<any>(null);
+
+  const handleOpenCertificate = (certificate: any) => {
+    setCertificateToBeViewd(certificate);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   const listCertificates = () => {
     setCertificates([]);
@@ -64,7 +75,7 @@ const AdminCertificates: FC = () => {
         title: "Arquivo",
         width: 140,
         cellRenderer: ({ rowData }) => (
-          <Button variation="secondary" size="small" href={rowData.certificateFile} target="_blank">
+          <Button variation="secondary" size="small" /* href={rowData.certificateFile} target="_blank" */ onClick={() => handleOpenCertificate(rowData)}>
             Visualizar
           </Button>
         ),
@@ -82,6 +93,15 @@ const AdminCertificates: FC = () => {
       }
     >
       <PageBlock>
+        <Modal
+          title={`Certificado nº ${certificateToBeViewd?.certificateNumber} - ${certificateToBeViewd?.certificateEmail}`}
+          centered
+          responsiveFullScreen
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        >
+          <iframe src={certificateToBeViewd?.certificateFile} style={{ width: "100%", height: "80vh" }} />
+        </Modal>
         <Table fullWidth schema={defaultTableSchema} items={certificates} emptyStateLabel={emptyStateLabel} />
       </PageBlock>
     </Layout>

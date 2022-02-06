@@ -61,11 +61,7 @@ const MyCertificates = ({ intl }) => {
         title: intl.formatMessage({ id: "myCertificates.file" }),
         width: 150,
         cellRenderer: ({ rowData }) => (
-          <Button
-            variation="secondary"
-            size="small"
-            onClick={() => handleOpenCertificate(rowData)} /*  href={rowData.certificateFile} target="_blank" */
-          >
+          <Button variation="secondary" size="small" onClick={() => handleOpenCertificate(rowData)}>
             {intl.formatMessage({ id: "myCertificates.viewFile" })}
           </Button>
         ),
@@ -155,7 +151,7 @@ const MyCertificates = ({ intl }) => {
                 centered
                 loading={loadingDelete}
                 confirmation={{
-                  onClick: () => handleConfirmation(),
+                  onClick: handleConfirmation,
                   label: intl.formatMessage({ id: "myCertificates.delete" }),
                   isDangerous: true,
                 }}
@@ -185,11 +181,7 @@ const MyCertificates = ({ intl }) => {
                 </section>
                 <section>
                   <strong>{intl.formatMessage({ id: "myCertificates.file" })}: </strong>
-                  <Button
-                    variation="secondary"
-                    size="small"
-                    onClick={() => handleOpenCertificate(certificateToDelete)} /*  href={certificateToDelete?.certificateFile} target="_blank" */
-                  >
+                  <Button variation="secondary" size="small" onClick={() => handleOpenCertificate(certificateToDelete)}>
                     {intl.formatMessage({ id: "myCertificates.viewFile" })}
                   </Button>
                 </section>

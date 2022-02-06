@@ -1,0 +1,59 @@
+curl --request PUT \
+     --url https://ssesandbox04.vtexcommercestable.com.br/api/dataentities/clients/schemas/certificate \
+     --header 'Content-Type: application/json' \
+     --header 'X-VTEX-API-AppKey: vtexappkey-ssesandbox04-NMXDHX' \
+     --header 'X-VTEX-API-AppToken: CLYBJYNSTIDGKWCYPDBUTXXXLATUZEWMGVEKXJYKMKYDOCXRNMRDPFKFOBPJETTOMRZPRSAFERIJZUIICCHMNSXBKZVWTPFTQJRWCIAVMLYXXBFUSGGCLHATUYERWEMP' \
+     --data '
+{
+  "title": "Certificado de Comprador",
+  "type": "object",
+  "properties": {
+    "certificateNumber": {
+      "type": "string",
+      "title": "Número do documento"
+    },
+    "certificateDateBegin": {
+      "type": "string",
+      "format": "date",
+      "title": "Início da validade"
+    },
+    "certificateDateEnd": {
+      "type": "string",
+      "format": "date",
+      "title": "Término da validade"
+    },
+    "certificateIssuerOrganization": {
+      "type": "string",
+      "title": "Órgão emissor"
+    },
+    "certificateEmail": {
+      "type": "string",
+      "format": "email",
+      "title": "Email"
+    },
+    "certificateFile": {
+      "type": "string",
+      "format": "data-url",
+      "title": "PDF do Certificado"
+    }
+  },
+  "required": [
+    "certificateEmail",
+    "certificateNumber",
+    "certificateDateBegin",
+    "certificateDateEnd",
+    "certificateIssuerOrganization",
+    "certificateFile"
+  ],
+  "v-indexed": [ "certificateEmail", "certificateNumber", "certificateDateBegin", "certificateDateEnd", "certificateIssuerOrganization" ],
+  "v-default-fields": [ "certificateEmail", "certificateFile" ],
+  "v-cache": false,
+  "v-security": {
+    "publicJsonSchema": true,
+    "allowGetAll": true,
+    "publicRead": [ "certificateEmail", "certificateNumber", "certificateDateBegin", "certificateDateEnd", "certificateIssuerOrganization", "certificateFile" ],
+    "publicWrite": [ "certificateEmail", "certificateNumber", "certificateDateBegin", "certificateDateEnd", "certificateIssuerOrganization", "certificateFile" ],
+    "publicFilter": [ "certificateEmail", "certificateNumber", "certificateDateBegin", "certificateDateEnd", "certificateIssuerOrganization" ]
+  }
+}
+'

@@ -24,5 +24,16 @@
     "allowed": ["product-summary"],
     "composition": "children",
     "component": "ListProductsCollectionOrder"
+  },
+  "my-account-link.my-certificates-link": {
+    "component": "MyCertificatesLink"
+  },
+  "my-account-page.my-certificates-page": {
+    "component": "MyCertificatesPage"
+  },
+  "add-to-cart-quantity-stepper": {
+    "component": "AddToCartQuantityStepper",
+    "allowed": ["add-to-cart-button"],
+    "blocks": ["add-to-cart-button"]
   }
 }

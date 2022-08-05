@@ -33,5 +33,20 @@
   "admin/editor.image.analytics.promotionId": "Promotion ID",
   "admin/editor.image.analytics.promotionName": "Promotion Name",
   "admin/editor.image.analytics.promotionPosition": "Creative position",
-  "admin/editor.productSummaryList.orderType.collection": "Collection"
+  "admin/editor.productSummaryList.orderType.collection": "Collection",
+  "myCertificates.link": "My Certificates",
+  "myCertificates.empty": "No Certificate",
+  "myCertificates.createdAt": "File uploaded at",
+  "myCertificates.file": "File",
+  "myCertificates.cancel": "Cancel",
+  "myCertificates.viewFile": "View",
+  "myCertificates.number": "Number",
+  "myCertificates.shelfLife": "Shelf life",
+  "myCertificates.issuerOrganization": "Issuer organization",
+  "myCertificates.delete": "Delete certificate",
+  "myCertificates.add": "Add certificate",
+  "myCertificates.reload": "Update list",
+  "adminCertificates.navigation.label": "Certificates manager",
+  "adminCertificates.navigation.users": "Users",
+  "adminCertificates.navigation.certificates": "Certificates"
 }

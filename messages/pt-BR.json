@@ -33,5 +33,20 @@
   "admin/editor.image.analytics.promotionId": "Id da promoção",
   "admin/editor.image.analytics.promotionName": "Nome da promoção",
   "admin/editor.image.analytics.promotionPosition": "Posição do criativo",
-  "admin/editor.productSummaryList.orderType.collection": "Coleção"
+  "admin/editor.productSummaryList.orderType.collection": "Coleção",
+  "myCertificates.link": "Meus certificados",
+  "myCertificates.empty": "Nenhum Certificado",
+  "myCertificates.createdAt": "Arquivo enviado em",
+  "myCertificates.file": "Arquivo",
+  "myCertificates.cancel": "Cancelar",
+  "myCertificates.viewFile": "Visualizar",
+  "myCertificates.number": "Número",
+  "myCertificates.shelfLife": "Validade",
+  "myCertificates.issuerOrganization": "Órgão emissor",
+  "myCertificates.delete": "Excluir certificado",
+  "myCertificates.add": "Adicionar certificado",
+  "myCertificates.reload": "Atualizar lista",
+  "adminCertificates.navigation.label": "Gerenciador de certificados",
+  "adminCertificates.navigation.users": "Usuários",
+  "adminCertificates.navigation.certificates": "Certificados"
 }

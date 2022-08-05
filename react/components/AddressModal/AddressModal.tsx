@@ -1,19 +1,19 @@
-import "./AddressModal.css";
-import React from "react";
-import { useCssHandles } from "vtex.css-handles";
+import './AddressModal.css'
+import React from 'react'
+import { useCssHandles } from 'vtex.css-handles'
 
 const CSS_HANDLES = [
-  "modalMain",
-  "modalHeader",
-  "modalForm",
-  "modalLabel",
-  "modalInput",
-  "modalButton",
-];
+  'modalMain',
+  'modalHeader',
+  'modalForm',
+  'modalLabel',
+  'modalInput',
+  'modalButton',
+]
 
 export default function AddressModal() {
-  const [cep, setCep] = React.useState("");
-  const handles = useCssHandles(CSS_HANDLES);
+  const [cep, setCep] = React.useState('')
+  const handles = useCssHandles(CSS_HANDLES)
 
   return (
     <div>
@@ -25,7 +25,7 @@ export default function AddressModal() {
           className={`${handles.modalForm}`}
           onSubmit={() => {
             if (cep.length === 8) {
-              localStorage.setItem("CEP", cep);
+              localStorage.setItem('CEP', cep)
             }
           }}
         >
@@ -33,21 +33,21 @@ export default function AddressModal() {
             <input
               className={`${handles.modalInput}`}
               maxLength={8}
-              onChange={(event) => {
+              onChange={event => {
                 if (
                   event.target.value.length === 8 &&
-                  !event.target.value.includes("-")
+                  !event.target.value.includes('-')
                 ) {
-                  setCep(event.target.value);
+                  setCep(event.target.value)
                   event.target.value = event.target.value.replace(
                     /^([\d]{5})-*([\d]{3})/,
-                    "$1-$2"
-                  );
+                    '$1-$2'
+                  )
                 } else {
-                  event.target.value = event.target.value.replace("-", "");
+                  event.target.value = event.target.value.replace('-', '')
                 }
               }}
-            />{" "}
+            />{' '}
           </label>
           <input
             className={`${handles.modalButton}`}
@@ -57,5 +57,5 @@ export default function AddressModal() {
         </form>
       </section>
     </div>
-  );
+  )
 }

@@ -1,0 +1,5 @@
+query getConfig {
+  appSettings(app: "ssesandbox04.cms-video-tutorial", version: "0.x") {
+    message
+  }
+}

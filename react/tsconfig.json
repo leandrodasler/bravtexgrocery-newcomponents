@@ -6,11 +6,20 @@
     "declaration": true,
     "declarationDir": "/cache/build/build_bravtexgrocerystore_master/bravtexgrocerystore.bravtexgrocery-newcomponents@0.1.0/public/@types/bravtexgrocerystore.bravtexgrocery-newcomponents/react",
     "jsx": "preserve",
-    "lib": ["es2017", "dom", "es2018.promise"],
+    "lib": [
+      "es2017",
+      "dom",
+      "es2018.promise"
+    ],
     "noEmitOnError": false,
     "sourceMap": true,
-    "typeRoots": ["node_modules/@types"],
-    "types": ["node", "react"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "node",
+      "react"
+    ],
     "alwaysStrict": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
@@ -25,7 +34,10 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true
   },
-  "exclude": ["node_modules", "node_modules"],
+  "exclude": [
+    "node_modules",
+    "node_modules"
+  ],
   "include": [
     "./typings/*.d.ts",
     "./**/*.tsx",
@@ -35,5 +47,7 @@
     "./**/*.ts",
     "./**/*.d.ts"
   ],
-  "typeAcquisition": { "enable": false }
+  "typeAcquisition": {
+    "enable": false
+  }
 }

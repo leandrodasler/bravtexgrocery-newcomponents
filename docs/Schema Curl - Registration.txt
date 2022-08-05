@@ -1,0 +1,145 @@
+curl --request PUT \
+     --url https://ssesandbox04.vtexcommercestable.com.br/api/dataentities/clients/schemas/registration \
+     --header 'Content-Type: application/json' \
+     --header 'X-VTEX-API-AppKey: vtexappkey-ssesandbox04-NMXDHX' \
+     --header 'X-VTEX-API-AppToken: CLYBJYNSTIDGKWCYPDBUTXXXLATUZEWMGVEKXJYKMKYDOCXRNMRDPFKFOBPJETTOMRZPRSAFERIJZUIICCHMNSXBKZVWTPFTQJRWCIAVMLYXXBFUSGGCLHATUYERWEMP' \
+     --data '
+{
+  "title": "Cadastro de Novo Comprador",
+  "type": "object",
+  "properties": {
+    "approved": {
+      "type": "boolean",
+      "title": "Cadastro aprovado",
+      "default": false
+    },
+    "category": {
+      "type": "string",
+      "title": "Categoria",
+      "enum": [
+        "Atirador",
+        "Consumidor",
+        "Colecionador",
+        "Militar do Exército Brasileiro",
+        "Policial Civil"
+      ]
+    },
+    "membershipClub": {
+      "type": "string",
+      "title": "Clube de Afiliação",
+      "enum": [
+        "CIRCULO MILITAR DE CACAPAVA",
+        "CLUBE DE TIRO 300",
+        "CLUBE CALIBRE DE TIRO",
+        "RED DOT TIRO E CACA"
+      ]
+    },
+    "firstName": {
+      "type": "string",
+      "title": "Nome"
+    },
+    "lastName": {
+      "type": "string",
+      "title": "Sobrenome"
+    },
+    "cpf": {
+      "title": "CPF",
+      "type": "string",
+      "maxlength": 11
+    },
+    "rg": {
+      "title": "RG",
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Email"
+    },
+    "patent": {
+      "type": "string",
+      "title": "Patente"
+    },
+    "company": {
+      "type": "string",
+      "title": "Nome da empresa/órgão"
+    },
+    "companyAddress": {
+      "title": "Endereço da empresa/órgão",
+      "type": "object",
+      "properties": {
+        "cep": {
+          "type": "string",
+          "title": "CEP",
+          "maxlenght": 9
+        },
+        "streetAddress": {
+          "type": "string",
+          "title": "Logradouro"
+        },
+        "streetNumber": {
+          "type": "integer",
+          "title": "Número"
+        },
+        "complement": {
+          "type": "string",
+          "title": "Complemento"
+        }
+      },
+      "required": [
+        "cep", "streetAddress", "streetNumber"
+      ]
+    },
+    "address": {
+      "title": "Endereço pessoal",
+      "type": "object",
+      "properties": {
+        "cep": {
+          "type": "string",
+          "title": "CEP",
+          "maxlenght": 9
+        },
+        "streetAddress": {
+          "type": "string",
+          "title": "Logradouro"
+        },
+        "streetNumber": {
+          "type": "integer",
+          "title": "Número"
+        },
+        "complement": {
+          "type": "string",
+          "title": "Complemento"
+        }
+      },
+      "required": [
+        "cep", "streetAddress", "streetNumber"
+      ]
+    }
+  },
+  "required": [
+    "category",
+    "firstName",
+    "lastName",
+    "cpf",
+    "rg",
+    "email",
+    "address"
+  ],
+  "v-indexed": [
+    "category",
+    "membershipClub",
+    "cpf",
+    "email"
+  ],
+  "v-default-fields": [ "approved", "category", "membershipClub", "firstName", "lastName", "cpf", "rg", "email", "address" ],
+  "v-cache": false,
+  "v-security": {
+    "publicJsonSchema": true,
+    "allowGetAll": true,
+    "publicRead": [ "approved", "category", "membershipClub", "firstName", "lastName", "cpf", "rg", "email", "patent", "company", "companyAddress", "address" ],
+    "publicWrite": [ "approved", "category", "membershipClub", "firstName", "lastName", "cpf", "rg", "email", "patent", "company", "companyAddress", "address" ],
+    "publicFilter": [  "approved", "category", "membershipClub", "firstName", "lastName", "cpf", "rg", "email", "patent", "company", "companyAddress", "address" ]
+  }
+}
+'

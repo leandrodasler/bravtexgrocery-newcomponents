@@ -9,6 +9,9 @@
     "docs": "0.x",
     "admin": "0.x"
   },
+  "scripts": {
+    "postreleasy": "vtex publish --verbose"
+  },
   "dependencies": {
     "vtex.css-handles": "0.x",
     "vtex.styleguide": "9.x",

@@ -30,5 +30,10 @@
   },
   "my-account-page.my-certificates-page": {
     "component": "MyCertificatesPage"
+  },
+  "add-to-cart-quantity-stepper": {
+    "component": "AddToCartQuantityStepper",
+    "allowed": ["add-to-cart-button"],
+    "blocks": ["add-to-cart-button"]
   }
 }

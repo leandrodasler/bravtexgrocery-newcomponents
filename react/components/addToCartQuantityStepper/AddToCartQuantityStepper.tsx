@@ -5,6 +5,7 @@ import React, {
   useMemo,
   useCallback,
 } from 'react'
+import { injectIntl } from 'react-intl'
 import { ProductContext } from 'vtex.product-context'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { ExtensionPoint } from 'vtex.render-runtime'
@@ -21,7 +22,7 @@ const CSS_HANDLES = [
   'contentQuantity',
 ]
 
-const AddToCartQuantityStepper = () => {
+const AddToCartQuantityStepper = ({ intl }) => {
   const { updateQuantity } = useOrderItems()
   const dispatch = useProductDispatch()
   const handles = useCssHandles(CSS_HANDLES)
@@ -48,9 +49,7 @@ const AddToCartQuantityStepper = () => {
         return item?.id === selectedItem?.selectedItem?.itemId
       })
 
-      console.log('event.value =', event.value)
-
-      if(+event.value !== 0) {
+      if (+event.value !== 0) {
         dispatch({ type: 'SET_QUANTITY', args: { quantity: event.value } })
       } else {
         dispatch({ type: 'SET_QUANTITY', args: { quantity: 1 } })
@@ -85,7 +84,8 @@ const AddToCartQuantityStepper = () => {
     }
 
     return false
-  }, [JSON.stringify(orderForm?.orderForm?.items)])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [orderForm?.orderForm?.items])
 
   return (
     <div className={`${handles.containerAddCartButton} pb4 pt0`}>
@@ -93,8 +93,11 @@ const AddToCartQuantityStepper = () => {
         <ExtensionPoint id="add-to-cart-button" />
       ) : (
         <div
-          className={`${handles.containerQuantity} `}
+          className={`${handles.containerQuantity}`}
           onClick={handleNumericClick}
+          onKeyUp={() => undefined}
+          role="button"
+          tabIndex={0}
         >
           <div className={`${handles.contentQuantity} mb2`}>
             <NumericStepper
@@ -107,7 +110,9 @@ const AddToCartQuantityStepper = () => {
             />
           </div>
           <span className={`${handles.contentAddedToCartTxt} `}>
-            Adicionado ao carrinho
+            {intl.formatMessage({
+              id: 'store.quantity-stepper.addedToCart.label',
+            })}
           </span>
         </div>
       )}
@@ -115,4 +120,4 @@ const AddToCartQuantityStepper = () => {
   )
 }
 
-export default AddToCartQuantityStepper
+export default injectIntl(AddToCartQuantityStepper)

@@ -48,5 +48,6 @@
   "myCertificates.reload": "Update list",
   "adminCertificates.navigation.label": "Certificates manager",
   "adminCertificates.navigation.users": "Users",
-  "adminCertificates.navigation.certificates": "Certificates"
+  "adminCertificates.navigation.certificates": "Certificates",
+  "store.quantity-stepper.addedToCart.label": "Added to cart"
 }

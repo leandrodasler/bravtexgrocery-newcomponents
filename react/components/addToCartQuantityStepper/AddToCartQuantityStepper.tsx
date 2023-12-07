@@ -1,18 +1,18 @@
 import React, {
+  useCallback,
   useContext,
   useEffect,
-  useState,
   useMemo,
-  useCallback,
+  useState,
 } from 'react'
-import { injectIntl } from 'react-intl'
-import { ProductContext } from 'vtex.product-context'
-import { useOrderForm } from 'vtex.order-manager/OrderForm'
-import { ExtensionPoint } from 'vtex.render-runtime'
-import { NumericStepper } from 'vtex.styleguide'
+import { useIntl } from 'react-intl'
 import { useCssHandles } from 'vtex.css-handles'
 import { useOrderItems } from 'vtex.order-items/OrderItems'
+import { useOrderForm } from 'vtex.order-manager/OrderForm'
+import { ProductContext } from 'vtex.product-context'
 import { useProductDispatch } from 'vtex.product-context/ProductDispatchContext'
+import { ExtensionPoint } from 'vtex.render-runtime'
+import { NumericStepper } from 'vtex.styleguide'
 import './AddToCartQuantityStepper.css'
 
 const CSS_HANDLES = [
@@ -22,7 +22,8 @@ const CSS_HANDLES = [
   'contentQuantity',
 ]
 
-const AddToCartQuantityStepper = ({ intl }) => {
+const AddToCartQuantityStepper = () => {
+  const intl = useIntl()
   const { updateQuantity } = useOrderItems()
   const dispatch = useProductDispatch()
   const handles = useCssHandles(CSS_HANDLES)
@@ -56,7 +57,7 @@ const AddToCartQuantityStepper = ({ intl }) => {
       }
 
       updateQuantity({
-        uniqueId: productUniqueId.uniqueId,
+        uniqueId: productUniqueId?.uniqueId,
         quantity: event.value,
       })
     },
@@ -120,4 +121,4 @@ const AddToCartQuantityStepper = ({ intl }) => {
   )
 }
 
-export default injectIntl(AddToCartQuantityStepper)
+export default AddToCartQuantityStepper

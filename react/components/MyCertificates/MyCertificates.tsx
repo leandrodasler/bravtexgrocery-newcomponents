@@ -1,17 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react'
-import { injectIntl } from 'react-intl'
+import { useIntl } from 'react-intl'
+import { ContentWrapper } from 'vtex.my-account-commons'
 import {
-  Spinner,
-  Table,
   Button,
   ButtonWithIcon,
-  IconUpload,
+  IconDelete,
   IconUnorderedList,
+  IconUpload,
   Modal,
   ModalDialog,
-  IconDelete,
+  Spinner,
+  Table,
 } from 'vtex.styleguide'
-import { ContentWrapper } from 'vtex.my-account-commons'
 
 type Certificate = {
   id: string
@@ -29,16 +30,19 @@ const commonFetchProperties: RequestInit = {
   credentials: 'same-origin',
 }
 
-const MyCertificates = ({ intl }) => {
+const MyCertificates = () => {
+  const intl = useIntl()
   const [userEmail, setUserEmail] = useState('')
   const [certificates, setCertificates] = useState<
-    Array<Certificate> | null | undefined
+    Certificate[] | null | undefined
   >(null)
+
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
   const [isModalViewOpen, setIsModalViewOpen] = useState(false)
   const [loadingDelete, setLoadingDelete] = useState(false)
   const [certificateToDelete, setCertificateToDelete] =
     useState<Certificate | null>(null)
+
   const [certificateToBeViewd, setCertificateToBeViewd] =
     useState<Certificate | null>(null)
 
@@ -56,51 +60,6 @@ const MyCertificates = ({ intl }) => {
     }
   }
 
-  const defaultTableSchema = {
-    properties: {
-      certificateNumber: {
-        title: intl.formatMessage({ id: 'myCertificates.number' }),
-      },
-      certificateDateBegin: {
-        title: intl.formatMessage({ id: 'myCertificates.shelfLife' }),
-        cellRenderer: ({ rowData }) =>
-          rowData.certificateDateBegin &&
-          rowData.certificateDateEnd &&
-          new Date(rowData.certificateDateBegin).toLocaleDateString() +
-            ' - ' +
-            new Date(rowData.certificateDateEnd).toLocaleDateString(),
-      },
-      certificateIssuerOrganization: {
-        title: intl.formatMessage({ id: 'myCertificates.issuerOrganization' }),
-      },
-      certificateFile: {
-        title: intl.formatMessage({ id: 'myCertificates.file' }),
-        width: 150,
-        cellRenderer: ({ rowData }) => (
-          <Button
-            variation="secondary"
-            size="small"
-            onClick={() => handleOpenCertificate(rowData)}
-          >
-            {intl.formatMessage({ id: 'myCertificates.viewFile' })}
-          </Button>
-        ),
-      },
-      id: {
-        title: ' ',
-        width: 60,
-        cellRenderer: ({ rowData }) => (
-          <ButtonWithIcon
-            variation="danger"
-            size="small"
-            onClick={() => handleDelete(rowData)}
-            icon={<IconDelete />}
-          />
-        ),
-      },
-    },
-  }
-
   const handleConfirmation = () => {
     if (certificateToDelete) {
       setLoadingDelete(true)
@@ -113,8 +72,8 @@ const MyCertificates = ({ intl }) => {
         .then(() => {
           setIsModalDeleteOpen(false)
           setLoadingDelete(false)
-          setCertificates(certificates =>
-            certificates?.filter(
+          setCertificates(current =>
+            current?.filter(
               certificate => certificate.id !== certificateToDelete.id
             )
           )
@@ -138,6 +97,53 @@ const MyCertificates = ({ intl }) => {
 
   const handleCloseModalCertificate = () => {
     setIsModalViewOpen(false)
+  }
+
+  const defaultTableSchema = {
+    properties: {
+      certificateNumber: {
+        title: intl.formatMessage({ id: 'myCertificates.number' }),
+      },
+      certificateDateBegin: {
+        title: intl.formatMessage({ id: 'myCertificates.shelfLife' }),
+        cellRenderer: ({ rowData }: any) =>
+          rowData.certificateDateBegin &&
+          rowData.certificateDateEnd &&
+          `${new Date(
+            rowData.certificateDateBegin
+          ).toLocaleDateString()} - ${new Date(
+            rowData.certificateDateEnd
+          ).toLocaleDateString()}`,
+      },
+      certificateIssuerOrganization: {
+        title: intl.formatMessage({ id: 'myCertificates.issuerOrganization' }),
+      },
+      certificateFile: {
+        title: intl.formatMessage({ id: 'myCertificates.file' }),
+        width: 150,
+        cellRenderer: ({ rowData }: any) => (
+          <Button
+            variation="secondary"
+            size="small"
+            onClick={() => handleOpenCertificate(rowData)}
+          >
+            {intl.formatMessage({ id: 'myCertificates.viewFile' })}
+          </Button>
+        ),
+      },
+      id: {
+        title: ' ',
+        width: 60,
+        cellRenderer: ({ rowData }: any) => (
+          <ButtonWithIcon
+            variation="danger"
+            size="small"
+            onClick={() => handleDelete(rowData)}
+            icon={<IconDelete />}
+          />
+        ),
+      },
+    },
   }
 
   useEffect(() => {
@@ -188,6 +194,7 @@ const MyCertificates = ({ intl }) => {
                 onClose={handleCloseModalCertificate}
               >
                 <iframe
+                  title="Certificado"
                   src={certificateToBeViewd?.certificateFile}
                   style={{ width: '100%', height: '80vh' }}
                 />
@@ -220,13 +227,11 @@ const MyCertificates = ({ intl }) => {
                   </strong>
                   {certificateToDelete?.certificateDateBegin &&
                     certificateToDelete?.certificateDateEnd &&
-                    new Date(
+                    `${new Date(
                       certificateToDelete?.certificateDateBegin
-                    ).toLocaleDateString() +
-                      ' - ' +
-                      new Date(
-                        certificateToDelete?.certificateDateEnd
-                      ).toLocaleDateString()}
+                    ).toLocaleDateString()} - ${new Date(
+                      certificateToDelete?.certificateDateEnd
+                    ).toLocaleDateString()}`}
                 </section>
                 <section className="mb4">
                   <strong>
@@ -267,4 +272,4 @@ const MyCertificates = ({ intl }) => {
   )
 }
 
-export default injectIntl(MyCertificates)
+export default MyCertificates

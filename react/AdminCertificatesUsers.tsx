@@ -1,145 +1,177 @@
-import React, { FC, useEffect, useState } from "react";
-import { Layout, PageHeader, PageBlock, Button, Table, IconSuccess, IconFailure, ModalDialog } from "vtex.styleguide";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { FC } from 'react'
+import React, { useEffect, useState } from 'react'
+import {
+  Button,
+  IconFailure,
+  IconSuccess,
+  Layout,
+  ModalDialog,
+  PageBlock,
+  PageHeader,
+  Table,
+} from 'vtex.styleguide'
 
 const commonFetchProperties: RequestInit = {
-  headers: { "Content-Type": "application/json" },
-  credentials: "same-origin",
-};
+  headers: { 'Content-Type': 'application/json' },
+  credentials: 'same-origin',
+}
 
-const DEFAULT_STATE_LABEL = "Carregando...";
+const DEFAULT_STATE_LABEL = 'Carregando...'
 
 const AdminCertificatesUsers: FC = () => {
-  const [users, setUsers] = useState<Array<any>>([]);
-  const [emptyStateLabel, setEmptyStateLabel] = useState(DEFAULT_STATE_LABEL);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
-  const [loadingConfirmation, setLoadingConfirmation] = useState(false);
-  const [userToApproval, setUserToApproval] = useState<any>(null);
+  const [users, setUsers] = useState<any[]>([])
+  const [emptyStateLabel, setEmptyStateLabel] = useState(DEFAULT_STATE_LABEL)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
+  const [loadingConfirmation, setLoadingConfirmation] = useState(false)
+  const [userToApproval, setUserToApproval] = useState<any>(null)
 
   const listUsers = () => {
-    setUsers([]);
-    setEmptyStateLabel(DEFAULT_STATE_LABEL);
+    setUsers([])
+    setEmptyStateLabel(DEFAULT_STATE_LABEL)
 
     fetch(
-      "/api/dataentities/clients/search?_schema=registration" +
-        "&_fields=id,firstName,lastName,email,cpf,rg,category," +
-        "membershipClub,patent,company,companyAddress,address,approved" +
-        "&_sort=email ASC",
+      '/api/dataentities/clients/search?_schema=registration' +
+        '&_fields=id,firstName,lastName,email,cpf,rg,category,' +
+        'membershipClub,patent,company,companyAddress,address,approved' +
+        '&_sort=email ASC',
       commonFetchProperties
     )
-      .then((res) => res.json())
-      .then((res) => {
-        setUsers(res);
+      .then(res => res.json())
+      .then(res => {
+        setUsers(res)
         if (!res.length) {
-          setEmptyStateLabel("Nenhum cadastro");
+          setEmptyStateLabel('Nenhum cadastro')
         }
-      });
-  };
+      })
+  }
 
   const handleConfirmationApproval = () => {
     if (userToApproval) {
-      setLoadingConfirmation(true);
+      setLoadingConfirmation(true)
 
       fetch(`/api/dataentities/clients/documents/${userToApproval.id}`, {
         ...commonFetchProperties,
-        method: "PATCH",
+        method: 'PATCH',
         body: JSON.stringify({ approved: !userToApproval.approved }),
       })
-        .then((res) => res.text())
+        .then(res => res.text())
         .then(() => {
-          setIsModalOpen(false);
-          setLoadingConfirmation(false);
-          setUsers((users) => users.map((user) => ({ ...user, approved: user.id === userToApproval.id ? !user.approved : user.approved })));
-        });
+          setIsModalOpen(false)
+          setLoadingConfirmation(false)
+          setUsers(current =>
+            current.map(user => ({
+              ...user,
+              approved:
+                user.id === userToApproval.id ? !user.approved : user.approved,
+            }))
+          )
+        })
     }
-  };
+  }
 
   const handleConfirmationDelete = () => {
     if (userToApproval) {
-      setLoadingConfirmation(true);
+      setLoadingConfirmation(true)
 
       fetch(`/api/dataentities/clients/documents/${userToApproval.id}`, {
         ...commonFetchProperties,
-        method: "DELETE",
+        method: 'DELETE',
       })
-        .then((res) => res.text())
+        .then(res => res.text())
         .then(() => {
-          fetch(`/api/dataentities/clients/search?_schema=certificate&_fields=id&certificateEmail=${userToApproval.email}`, commonFetchProperties)
-            .then((res) => res.json())
-            .then((res) => {
-              res.forEach((certificate) => {
+          fetch(
+            `/api/dataentities/clients/search?_schema=certificate&_fields=id&certificateEmail=${userToApproval.email}`,
+            commonFetchProperties
+          )
+            .then(res => res.json())
+            .then(res => {
+              res.forEach((certificate: any) => {
                 fetch(`/api/dataentities/clients/documents/${certificate.id}`, {
                   ...commonFetchProperties,
-                  method: "DELETE",
-                });
-              });
-            });
-          setIsModalDeleteOpen(false);
-          setIsModalOpen(false);
-          setLoadingConfirmation(false);
-          setUsers((users) => users.filter((user) => user.id !== userToApproval.id));
-        });
+                  method: 'DELETE',
+                })
+              })
+            })
+          setIsModalDeleteOpen(false)
+          setIsModalOpen(false)
+          setLoadingConfirmation(false)
+          setUsers(current =>
+            current.filter(user => user.id !== userToApproval.id)
+          )
+        })
     }
-  };
+  }
 
   const handleCancelationApproval = () => {
-    setIsModalOpen(false);
-  };
+    setIsModalOpen(false)
+  }
 
   const handleCancelationDelete = () => {
-    setIsModalDeleteOpen(false);
-  };
+    setIsModalDeleteOpen(false)
+  }
 
-  const handleChangeApproval = (user: object) => {
-    setUserToApproval(user);
-    setIsModalOpen(true);
-  };
+  const handleChangeApproval = (user: any) => {
+    setUserToApproval(user)
+    setIsModalOpen(true)
+  }
 
   const handleDelete = () => {
-    setIsModalDeleteOpen(true);
-  };
+    setIsModalDeleteOpen(true)
+  }
 
-  useEffect(listUsers, []);
+  useEffect(listUsers, [])
 
   const defaultTableSchema = {
     properties: {
       firstName: {
-        title: "Nome",
-        cellRenderer: ({ rowData }) => rowData.firstName + " " + rowData.lastName,
+        title: 'Nome',
+        cellRenderer: ({ rowData }: any) =>
+          `${rowData.firstName} ${rowData.lastName}`,
       },
       email: {
-        title: "Email",
+        title: 'Email',
       },
       category: {
-        title: "Categoria",
+        title: 'Categoria',
       },
       membershipClub: {
-        title: "Clube de afiliação",
+        title: 'Clube de afiliação',
       },
       approved: {
-        title: "Aprovado?",
+        title: 'Aprovado?',
         width: 100,
-        cellRenderer: ({ rowData }) => (
-          <span className={"ml6 " + (rowData.approved ? "green" : "red")}>{rowData.approved ? <IconSuccess /> : <IconFailure />}</span>
+        cellRenderer: ({ rowData }: any) => (
+          <span className={`ml6 ${rowData.approved ? 'green' : 'red'}`}>
+            {rowData.approved ? <IconSuccess /> : <IconFailure />}
+          </span>
         ),
       },
       id: {
-        title: " ",
+        title: ' ',
         width: 150,
-        cellRenderer: ({ rowData }) => (
-          <Button variation="secondary" size="small" onClick={() => handleChangeApproval(rowData)}>
+        cellRenderer: ({ rowData }: any) => (
+          <Button
+            variation="secondary"
+            size="small"
+            onClick={() => handleChangeApproval(rowData)}
+          >
             Analisar
           </Button>
         ),
       },
     },
-  };
+  }
 
   return (
     <Layout
       fullWidth
       pageHeader={
-        <PageHeader title="Usuários" subtitle="Usuários que solicitaram autorização de compra a ser validada por certificado">
+        <PageHeader
+          title="Usuários"
+          subtitle="Usuários que solicitaram autorização de compra a ser validada por certificado"
+        >
           <Button onClick={listUsers}>Atualizar</Button>
         </PageHeader>
       }
@@ -150,19 +182,19 @@ const AdminCertificatesUsers: FC = () => {
           loading={loadingConfirmation}
           confirmation={{
             onClick: handleConfirmationApproval,
-            label: userToApproval?.approved ? "Bloquear" : "Aprovar",
+            label: userToApproval?.approved ? 'Bloquear' : 'Aprovar',
             isDangerous: userToApproval?.approved,
           }}
           cancelation={{
             onClick: handleCancelationApproval,
-            label: "Cancelar",
+            label: 'Cancelar',
           }}
           isOpen={isModalOpen}
           onClose={handleCancelationApproval}
         >
           <h3>Analisar cadastro</h3>
           <section className="mb4">
-            <strong>Status: </strong>{" "}
+            <strong>Status: </strong>{' '}
             {userToApproval?.approved ? (
               <span className="green">
                 <strong>Aprovado</strong>
@@ -175,7 +207,7 @@ const AdminCertificatesUsers: FC = () => {
           </section>
           <section className="mb4">
             <strong>Nome: </strong>
-            {userToApproval?.firstName + " " + userToApproval?.lastName}
+            {`${userToApproval?.firstName} ${userToApproval?.lastName}`}
           </section>
           <section className="mb4">
             <strong>Email: </strong>
@@ -208,17 +240,22 @@ const AdminCertificatesUsers: FC = () => {
           <section className="mb4">
             <strong>Endereço da empresa/órgão: </strong>
             {userToApproval?.companyAddress?.streetAddress &&
-              userToApproval?.companyAddress?.streetAddress +
-                ", " +
-                userToApproval?.companyAddress?.streetNumber +
-                ", CEP " +
-                userToApproval?.companyAddress?.cep +
-                (userToApproval?.companyAddress?.complement ? ", " + userToApproval?.companyAddress?.complement : "")}
+              `${userToApproval?.companyAddress?.streetAddress}, ${
+                userToApproval?.companyAddress?.streetNumber
+              }, CEP ${userToApproval?.companyAddress?.cep}${
+                userToApproval?.companyAddress?.complement
+                  ? `, ${userToApproval?.companyAddress?.complement}`
+                  : ''
+              }`}
           </section>
           <section className="mb4">
             <strong>Endereço pessoal: </strong>
-            {userToApproval?.address?.streetAddress}, {userToApproval?.address?.streetNumber}, CEP {userToApproval?.address?.cep}
-            {userToApproval?.address?.complement ? ", " + userToApproval?.address?.complement : ""}
+            {userToApproval?.address?.streetAddress},{' '}
+            {userToApproval?.address?.streetNumber}, CEP{' '}
+            {userToApproval?.address?.cep}
+            {userToApproval?.address?.complement
+              ? `, ${userToApproval?.address?.complement}`
+              : ''}
           </section>
           <section className="mb4">
             <Button size="small" variation="danger" onClick={handleDelete}>
@@ -231,24 +268,32 @@ const AdminCertificatesUsers: FC = () => {
             loading={loadingConfirmation}
             confirmation={{
               onClick: handleConfirmationDelete,
-              label: "Excluir cadastro",
+              label: 'Excluir cadastro',
               isDangerous: true,
             }}
             cancelation={{
               onClick: handleCancelationDelete,
-              label: "Cancelar",
+              label: 'Cancelar',
             }}
             isOpen={isModalDeleteOpen}
             onClose={handleCancelationDelete}
           >
             <h3>Confirma a exclusão do cadastro?</h3>
-            <section>Esta ação também irá excluir os certificados associados a este cadastro, se existirem.</section>
+            <section>
+              Esta ação também irá excluir os certificados associados a este
+              cadastro, se existirem.
+            </section>
           </ModalDialog>
         </ModalDialog>
-        <Table fullWidth schema={defaultTableSchema} items={users} emptyStateLabel={emptyStateLabel} />
+        <Table
+          fullWidth
+          schema={defaultTableSchema}
+          items={users}
+          emptyStateLabel={emptyStateLabel}
+        />
       </PageBlock>
     </Layout>
-  );
-};
+  )
+}
 
-export default AdminCertificatesUsers;
+export default AdminCertificatesUsers

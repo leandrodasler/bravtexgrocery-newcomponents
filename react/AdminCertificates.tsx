@@ -1,127 +1,164 @@
-import React, { FC, useEffect, useState } from "react";
-import { Layout, PageHeader, PageBlock, Button, Table, ButtonWithIcon, Modal, ModalDialog, IconDelete } from "vtex.styleguide";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { FC } from 'react'
+import React, { useEffect, useState } from 'react'
+import {
+  Button,
+  ButtonWithIcon,
+  IconDelete,
+  Layout,
+  Modal,
+  ModalDialog,
+  PageBlock,
+  PageHeader,
+  Table,
+} from 'vtex.styleguide'
 
 const commonFetchProperties: RequestInit = {
-  headers: { "Content-Type": "application/json" },
-  credentials: "same-origin",
-};
+  headers: { 'Content-Type': 'application/json' },
+  credentials: 'same-origin',
+}
 
-const DEFAULT_STATE_LABEL = "Carregando...";
+const DEFAULT_STATE_LABEL = 'Carregando...'
 
 const AdminCertificates: FC = () => {
-  const [certificates, setCertificates] = useState<Array<any>>([]);
-  const [emptyStateLabel, setEmptyStateLabel] = useState(DEFAULT_STATE_LABEL);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
-  const [certificateToBeViewd, setCertificateToBeViewd] = useState<any>(null);
-  const [certificateToDelete, setCertificateToDelete] = useState<any>(null);
-  const [loadingDelete, setLoadingDelete] = useState(false);
+  const [certificates, setCertificates] = useState<any[]>([])
+  const [emptyStateLabel, setEmptyStateLabel] = useState(DEFAULT_STATE_LABEL)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
+  const [certificateToBeViewd, setCertificateToBeViewd] = useState<any>(null)
+  const [certificateToDelete, setCertificateToDelete] = useState<any>(null)
+  const [loadingDelete, setLoadingDelete] = useState(false)
 
   const handleOpenCertificate = (certificate: any) => {
-    setCertificateToBeViewd(certificate);
-    setIsModalOpen(true);
-  };
+    setCertificateToBeViewd(certificate)
+    setIsModalOpen(true)
+  }
 
   const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+    setIsModalOpen(false)
+  }
 
   const handleConfirmation = () => {
     if (certificateToDelete) {
-      setLoadingDelete(true);
+      setLoadingDelete(true)
 
       fetch(`/api/dataentities/clients/documents/${certificateToDelete.id}`, {
         ...commonFetchProperties,
-        method: "DELETE",
+        method: 'DELETE',
       })
-        .then((res) => res.text())
+        .then(res => res.text())
         .then(() => {
-          setIsModalDeleteOpen(false);
-          setLoadingDelete(false);
-          setCertificates((certificates) => certificates?.filter((certificate) => certificate.id !== certificateToDelete.id));
-        });
+          setIsModalDeleteOpen(false)
+          setLoadingDelete(false)
+          setCertificates(current =>
+            current?.filter(
+              certificate => certificate.id !== certificateToDelete.id
+            )
+          )
+        })
     }
-  };
+  }
 
   const handleCancelation = () => {
-    setIsModalDeleteOpen(false);
-  };
+    setIsModalDeleteOpen(false)
+  }
 
   const handleDelete = (certificate: any) => {
-    setCertificateToDelete(certificate);
-    setIsModalDeleteOpen(true);
-  };
+    setCertificateToDelete(certificate)
+    setIsModalDeleteOpen(true)
+  }
 
   const listCertificates = () => {
-    setCertificates([]);
-    setEmptyStateLabel(DEFAULT_STATE_LABEL);
+    setCertificates([])
+    setEmptyStateLabel(DEFAULT_STATE_LABEL)
 
     fetch(
-      "/api/dataentities/clients/search?_schema=certificate" +
-        "&_fields=id,createdIn,certificateEmail,certificateNumber," +
-        "certificateDateBegin,certificateDateEnd,certificateIssuerOrganization,certificateFile" +
-        "&_sort=certificateEmail ASC&_sort=createdIn ASC",
+      '/api/dataentities/clients/search?_schema=certificate' +
+        '&_fields=id,createdIn,certificateEmail,certificateNumber,' +
+        'certificateDateBegin,certificateDateEnd,certificateIssuerOrganization,certificateFile' +
+        '&_sort=certificateEmail ASC&_sort=createdIn ASC',
       commonFetchProperties
     )
-      .then((res) => res.json())
-      .then((res) => {
-        setCertificates(res);
+      .then(res => res.json())
+      .then(res => {
+        setCertificates(res)
         if (!res.length) {
-          setEmptyStateLabel("Nenhum certificado");
+          setEmptyStateLabel('Nenhum certificado')
         }
-      });
-  };
+      })
+  }
 
-  useEffect(listCertificates, []);
+  useEffect(listCertificates, [])
 
   const defaultTableSchema = {
     properties: {
       createdIn: {
-        title: "Enviado em",
+        title: 'Enviado em',
         width: 180,
-        cellRenderer: ({ rowData }) =>
-          rowData.createdIn && new Date(rowData.createdIn).toLocaleDateString() + " - " + new Date(rowData.createdIn).toLocaleTimeString(),
+        cellRenderer: ({ rowData }: any) =>
+          rowData.createdIn &&
+          `${new Date(rowData.createdIn).toLocaleDateString()} - ${new Date(
+            rowData.createdIn
+          ).toLocaleTimeString()}`,
       },
       certificateEmail: {
-        title: "Email",
+        title: 'Email',
       },
       certificateNumber: {
-        title: "Número",
+        title: 'Número',
         width: 100,
       },
       certificateDateBegin: {
-        title: "Validade",
+        title: 'Validade',
         width: 210,
-        cellRenderer: ({ rowData }) =>
+        cellRenderer: ({ rowData }: any) =>
           rowData.certificateDateBegin &&
           rowData.certificateDateEnd &&
-          new Date(rowData.certificateDateBegin).toLocaleDateString() + " - " + new Date(rowData.certificateDateEnd).toLocaleDateString(),
+          `${new Date(
+            rowData.certificateDateBegin
+          ).toLocaleDateString()} - ${new Date(
+            rowData.certificateDateEnd
+          ).toLocaleDateString()}`,
       },
       certificateIssuerOrganization: {
-        title: "Órgão emissor",
+        title: 'Órgão emissor',
       },
       certificateFile: {
-        title: "Arquivo",
+        title: 'Arquivo',
         width: 140,
-        cellRenderer: ({ rowData }) => (
-          <Button variation="secondary" size="small" onClick={() => handleOpenCertificate(rowData)}>
+        cellRenderer: ({ rowData }: any) => (
+          <Button
+            variation="secondary"
+            size="small"
+            onClick={() => handleOpenCertificate(rowData)}
+          >
             Visualizar
           </Button>
         ),
       },
       id: {
-        title: " ",
+        title: ' ',
         width: 60,
-        cellRenderer: ({ rowData }) => <ButtonWithIcon variation="danger" size="small" onClick={() => handleDelete(rowData)} icon={<IconDelete />} />,
+        cellRenderer: ({ rowData }: any) => (
+          <ButtonWithIcon
+            variation="danger"
+            size="small"
+            onClick={() => handleDelete(rowData)}
+            icon={<IconDelete />}
+          />
+        ),
       },
     },
-  };
+  }
 
   return (
     <Layout
       fullWidth
       pageHeader={
-        <PageHeader title="Certificados" subtitle="Certificados enviados pelos usuários">
+        <PageHeader
+          title="Certificados"
+          subtitle="Certificados enviados pelos usuários"
+        >
           <Button onClick={listCertificates}>Atualizar</Button>
         </PageHeader>
       }
@@ -134,19 +171,23 @@ const AdminCertificates: FC = () => {
           isOpen={isModalOpen}
           onClose={handleCloseModal}
         >
-          <iframe src={certificateToBeViewd?.certificateFile} style={{ width: "100%", height: "80vh" }} />
+          <iframe
+            title="Certificado"
+            src={certificateToBeViewd?.certificateFile}
+            style={{ width: '100%', height: '80vh' }}
+          />
         </Modal>
         <ModalDialog
           centered
           loading={loadingDelete}
           confirmation={{
             onClick: handleConfirmation,
-            label: "Excluir certificado",
+            label: 'Excluir certificado',
             isDangerous: true,
           }}
           cancelation={{
             onClick: handleCancelation,
-            label: "Cancelar",
+            label: 'Cancelar',
           }}
           isOpen={isModalDeleteOpen}
           onClose={handleCancelation}
@@ -164,9 +205,11 @@ const AdminCertificates: FC = () => {
             <strong>Validade: </strong>
             {certificateToDelete?.certificateDateBegin &&
               certificateToDelete?.certificateDateEnd &&
-              new Date(certificateToDelete?.certificateDateBegin).toLocaleDateString() +
-                " - " +
-                new Date(certificateToDelete?.certificateDateEnd).toLocaleDateString()}
+              `${new Date(
+                certificateToDelete?.certificateDateBegin
+              ).toLocaleDateString()} - ${new Date(
+                certificateToDelete?.certificateDateEnd
+              ).toLocaleDateString()}`}
           </section>
           <section className="mb4">
             <strong>Órgão emissor: </strong>
@@ -174,15 +217,24 @@ const AdminCertificates: FC = () => {
           </section>
           <section>
             <strong>Arquivo: </strong>
-            <Button variation="secondary" size="small" onClick={() => handleOpenCertificate(certificateToDelete)}>
+            <Button
+              variation="secondary"
+              size="small"
+              onClick={() => handleOpenCertificate(certificateToDelete)}
+            >
               Visualizar
             </Button>
           </section>
         </ModalDialog>
-        <Table fullWidth schema={defaultTableSchema} items={certificates} emptyStateLabel={emptyStateLabel} />
+        <Table
+          fullWidth
+          schema={defaultTableSchema}
+          items={certificates}
+          emptyStateLabel={emptyStateLabel}
+        />
       </PageBlock>
     </Layout>
-  );
-};
+  )
+}
 
-export default AdminCertificates;
+export default AdminCertificates
